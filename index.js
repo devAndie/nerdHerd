@@ -84,4 +84,25 @@ app.get("/api/technicians/:id/Generate_Report", (req, res) => {
     );
 });
 
- app.listen(9000, () => console.log("App listening on port 9000"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.post("/api/Operator", (req, res) => {
+    const Operator = req.body;
+    if (!Operator.name) {
+    return res.status(400).json({ error: "Invalid payload" });
+    }
+     pool.query(
+         "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES ()",
+        [Operator.name],
+        (error, results) => {
+            if (error) {
+             return res.status(500).json({ error });
+            }
+        res.json(results.insertId);
+        }
+    );
+});
+
+
+app.listen(9000, () => console.log("App listening on port 9000"));
