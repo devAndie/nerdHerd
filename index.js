@@ -73,7 +73,7 @@ app.get("/api/technicians/:id/Technician_Dispatch", (req, res) => {
 });
 app.get("/api/technicians/:id/Generate_Report", (req, res) => {
     pool.query(
-        "SELECT e.enquirer_id, e.enquirer_name, problem, technician_dispatch, e.operator_id, operator_name, department technician_id, technician_name, affiliation FROM enquirers e JOIN operators o ON o.operator_id= e.operator_id JOIN technicians t ON t.technician_id= e.technician_id",
+        "SELECT e.enquirer_id, e.enquirer_name, problem, technician_dispatch, e.operator_id, operator_name, department, e.technician_id, technician_name, affiliation FROM enquirers e JOIN operators o ON o.operator_id= e.operator_id JOIN technicians t ON t.technician_id= e.technician_id",
         [req.params.id],
         (error, rows) => {
             if (error) {
