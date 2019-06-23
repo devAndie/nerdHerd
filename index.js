@@ -17,6 +17,22 @@ app.get("/api/technicians", (req, res) => {
         res.json(rows);
     });
 });
+app.get("/api/enquirers", (req, res) => {
+    pool.query("SELECT * FROM enquirers", (error, rows) => {
+       if (error) {
+           return res.status(500).json({ error });
+       }
+       res.json(rows);
+   });
+});
+app.get("/api/Operators", (req, res) => {
+    pool.query("SELECT * FROM Operators", (error, rows) => {
+       if (error) {
+           return res.status(500).json({ error });
+       }
+       res.json(rows);
+   });
+});
 
 app.get("/api/Technicians/:id", (req, res) => {
     pool.query(
