@@ -10,7 +10,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "mysql": "^2.17.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devAndie/nerdHerd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devAndie/nerdHerd/issues"
+  },
+  "homepage": "https://github.com/devAndie/nerdHerd#readme"
 }
