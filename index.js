@@ -31,4 +31,17 @@ app.get("/api/Technicians/:id", (req, res) => {
     );
 });
 
+app.get("/api/technicians/:id/Tech_Support", (req, res) => {
+    pool.query(
+        "SELECT enquirer_id, enquirer_name, problem, e.operator_id, operator_name, e.technician_id, technician_name, affiliation FROM enquirers e JOIN operators o ON o.operator_id= e.operator_id JOIN technicians t ON t.technician_id= e.technician_id WHERE enquirer_id = 4",
+        [req.params.id],
+        (error, rows) => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(rows);
+        }
+    );
+});
+
  app.listen(9000, () => console.log("App listening on port 9000"));
