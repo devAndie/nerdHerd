@@ -103,6 +103,22 @@ app.post("/api/addOperator", (req, res) => {
         }
     );
 });
+app.post("/api/addTechnician", (req, res) => {
+    const Operator = req.body;
+    if (!Operator.name) {
+    return res.status(400).json({ error: "Invalid payload" });
+    }
+     pool.query(
+        "INSERT INTO Technicians (Technician_id, Technician_name, affiliation) VALUES (7, 'John Oloo', 'system Installation'), (8, 'Samwell Kiberenge', 'Hardware maintenance')",
+        [Operator.name],
+        (error, results) => {
+            if (error) {
+             return res.status(500).json({ error });
+            }
+        res.json(results.insertId);
+        }
+    );
+});
 
 
 app.listen(9000, () => console.log("App listening on port 9000"));
