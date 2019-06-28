@@ -73,7 +73,7 @@ app.get("/api/technicians/:id/Technician_Dispatch", (req, res) => {
 });
 app.get("/api/technicians/:id/Generate_Report", (req, res) => {
     pool.query(
-        "SELECT e.enquirer_id, e.enquirer_name, problem, technician_dispatch, e.operator_id, operator_name, department, e.technician_id, technician_name, affiliation FROM enquirers e JOIN operators o ON o.operator_id= e.operator_id JOIN technicians t ON t.technician_id= e.technician_id",
+        'SELECT e.enquirer_id, e.enquirer_name, problem, technician_dispatch, e.operator_id, operator_name, department, e.technician_id, technician_name, affiliation FROM enquirers e JOIN operators o ON o.operator_id= e.operator_id JOIN technicians t ON t.technician_id= e.technician_id',
         [req.params.id],
         (error, rows) => {
             if (error) {
@@ -87,13 +87,13 @@ app.get("/api/technicians/:id/Generate_Report", (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.post("/api/Operator", (req, res) => {
+app.post("/api/addOperator", (req, res) => {
     const Operator = req.body;
     if (!Operator.name) {
     return res.status(400).json({ error: "Invalid payload" });
     }
      pool.query(
-         "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES ()",
+         "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES (6, 'Billie Mwai', 'responder')",
         [Operator.name],
         (error, results) => {
             if (error) {
