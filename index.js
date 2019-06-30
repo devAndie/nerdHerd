@@ -87,7 +87,7 @@ app.get("/api/technicians/:id/Generate_Report", (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.post("/api/Operator", (req, res) => {
+app.post("/api/addOperator", (req, res) => {
     const Operator = req.body;
     if (!Operator.name) {
     return res.status(400).json({ error: "Invalid payload" });
