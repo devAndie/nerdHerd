@@ -104,8 +104,8 @@ app.post("/api/addOperator", (req, res) => {
     );
 });
 app.post("/api/addTechnician", (req, res) => {
-    const Operator = req.body;
-    if (!Operator.name) {
+    const Technician = req.body;
+    if (!Technician.name) {
     return res.status(400).json({ error: "Invalid payload" });
     }
      pool.query(
