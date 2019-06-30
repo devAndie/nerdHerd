@@ -87,20 +87,20 @@ app.get("/api/technicians/:id/Generate_Report", (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.post("/api/addOperator", (req, res) => {
+app.post("/api/Operator", (req, res) => {
     const Operator = req.body;
     if (!Operator.name) {
     return res.status(400).json({ error: "Invalid payload" });
     }
-     pool.query(
-         "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES (6, 'Billie Mwai', 'responder')",
+    pool.query(
+        "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES (6, 'Billie Mwai', 'responder'), (7, 'Joe '",
         [Operator.name],
         (error, results) => {
             if (error) {
              return res.status(500).json({ error });
             }
         res.json(results.insertId);
-        }
+        } 
     );
 });
 app.post("/api/addTechnician", (req, res) => {
