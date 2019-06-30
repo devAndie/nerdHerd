@@ -93,7 +93,7 @@ app.post("/api/Operator", (req, res) => {
     return res.status(400).json({ error: "Invalid payload" });
     }
     pool.query(
-        "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES (6, 'Billie Mwai', 'responder'), (7, 'Joe Baiden', 'responder')",
+        "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES (6, 'Billie Mwai', 'responder'), (7, 'Joe Baiden', 'responder'), (8, 'Thomas Kruger', 'responder')",
         [Operator.name],
         (error, results) => {
             if (error) {
