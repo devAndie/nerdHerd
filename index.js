@@ -120,5 +120,20 @@ app.post("/api/addTechnician", (req, res) => {
     );
 });
 
-
+app.put("/api/updateOperator", (req, res) => {
+    const Operator = req.body;
+    if(Operator.name="") {
+        return res.status(400).json({ error: "Invalid payload" });
+    }
+    pool.query(
+        "UPDATE Operators SET Dpartment = responder WHERE id = 3",
+        [Operator.name, req.params.id],
+        (error, results) => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(results.changedRows);
+        }
+    );
+});
 app.listen(9000, () => console.log("App listening on port 9000"));
