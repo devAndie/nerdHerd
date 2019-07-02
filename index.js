@@ -126,7 +126,7 @@ app.put("/api/updateOperator", (req, res) => {
         return res.status(400).json({ error: "Invalid payload" });
     }
     pool.query(
-        "UPDATE Operators SET Dpartment = responder WHERE id = 3",
+        "UPDATE Operators SET Department = 'responder' WHERE Operator_id = 3",
         [Operator.name, req.params.id],
         (error, results) => {
             if (error) {
