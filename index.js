@@ -104,13 +104,13 @@ app.post("/api/addOperator", (req, res) => {
     );
 });
 app.post("/api/addTechnician", (req, res) => {
-    const Technicians = req.body;
-    if (!Technician.name) {
+    const Technician = req.body;
+    if (Technician.name="") {
     return res.status(400).json({ error: "Invalid payload" });
     }
      pool.query(
         "INSERT INTO Technicians (Technician_id, Technician_name, affiliation) VALUES (7, 'John Oloo', 'system Installation'), (8, 'Samwell Kiberenge', 'Hardware maintenance')",
-        [Operator.name],
+        [Technician.name],
         (error, results) => {
             if (error) {
              return res.status(500).json({ error });
