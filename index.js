@@ -136,4 +136,21 @@ app.put("/api/updateOperator", (req, res) => {
         }
     );
 });
+app.put("/api/updateTechnician", (req, res) => {
+    const Technician = req.body;
+    if(Technician.name="") {
+        return res.status(400).json({ error: "Invalid payload" });
+    }
+    pool.query(
+        "UPDATE Operators SET affiliation = 'networking' WHERE Technician_id = 3",
+        [Operator.name, req.params.id],
+        (error, results) => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(results.changedRows);
+        }
+    );
+});
+
 app.listen(9000, () => console.log("App listening on port 9000"));
