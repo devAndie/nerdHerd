@@ -88,6 +88,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.post("/api/addOperator", (req, res) => {
+    const Operator = req.body;
+    if (Operator.name="") {
+    return res.status(400).json({ error: "Invalid payload" });
+    }
     pool.query(
         "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES (6, 'Billie Mwai', 'responder'), (7, 'Joe Baiden', 'responder'), (8, 'Thomas Kruger', 'responder')",
         [Operator.name],
@@ -100,7 +104,11 @@ app.post("/api/addOperator", (req, res) => {
     );
 });
 app.post("/api/addTechnician", (req, res) => {
-    pool.query(
+    const Technicians = req.body;
+    if (!Technician.name) {
+    return res.status(400).json({ error: "Invalid payload" });
+    }
+     pool.query(
         "INSERT INTO Technicians (Technician_id, Technician_name, affiliation) VALUES (7, 'John Oloo', 'system Installation'), (8, 'Samwell Kiberenge', 'Hardware maintenance')",
         [Operator.name],
         (error, results) => {
