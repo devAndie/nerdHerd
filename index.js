@@ -191,5 +191,17 @@ app.delete("/api/dropOperator/:id", (req, res) => {
         }
     );
 });
+app.delete("/api/dropenquirer/:id", (req, res) => {
+    pool.query(
+        "DELETE FROM enquirers WHERE id = 6",
+        [req.params.id],
+        (error, results) => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(results.affectedRows);
+        }
+    );
+});
 
 app.listen(9000, () => console.log("App listening on port 9000"));
