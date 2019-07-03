@@ -202,7 +202,78 @@ app.delete("/api/dropenquirer/:id", (req, res) => {
         }
     );
 });
+
+app.post("/api/nerdHerds", (req, res) => {
+        const {Operator_id, Operator_name, Department} = req.body;
+            if (!Operator_id ||Operator_name ||Department) {
+                return res.status(400).json({ error: "Invalid payload" });
+            }
+            pool.getConnection((error, connection) => {
+                if (error) {
+                    return res.status(500).json({ error });
+                }
+                connection.beginTransaction(error => {
+                    if (error) {
+                        return res.status(500).json({ error });
+                    }
+                    connection.query(
+                        "INSERT INTO Operators (Operator_id, Operator_name, Department) VALUES (?, ?, ?)",
+                        [Operator_id, Operator_name, Department],
+                        (error, results) => {
+                            if (error) {
+                                return connection.rollback(() => {
+                                res.status(500).json({ error });
+                            });
+                        }
+                        const insertId = results.insertId;
+                        const Technician_id = genres=Technician_id.map(Technician_id => [insertId, Technician_id]);
+                        const Technician_name = Technician_name.map(Technician_name => [insertId, Technician_name]);
+                        const Affiliation =Affiliation.map(Affiliation => [insertId, Affiliation]);
+                        connection.query(
+                            "INSERT INTO Technicians (Technician_id, Technician_name, Affiliation) VALUES (?, ?, ?)",
+                            [Technician_id, Technician_name, Affiliation],
+                            (error, results) => {
+                                if (error) {
+                                    return connection.rollback(() => {
+                                        res.status(500).json({ error });
+                                    });
+                                }
+                            const insertId = results.insertId;
+                            const enquirer_id = enquirer_id.map(enquirer_id =>[insertId, enquirer_id])
+                            const enquirer_name = enquirer_name.map(enquirer_name =>[insertId, enquirer_name])
+                            const enquirer_address = enquirer_address.map(enquirer_address => [insertId, enquirer_address])
+                            const problem = problem.map()
+                            const Technician_Dispatch = Technician_Dispatch.map(Technician_Dispatch => [insertId, Technician_Dispatch]);
+                            connection.query(
+                                "INSERT INTO enquirers (enquirer_id, enquirer_name, enquirer_address, problem, problem, Technician_dispatch) VALUES (?, ?, ?, ?, ?)",
+                                [enquirer_id, enquirer_name, enquirer_address, problem, Technician_Dispatch],
+                                (error, results) => {
+                                    if (error) {
+                                        return connection.rollback(() => {
+                                            res.status(500).json({ error });
+                                        });
+                                    }
+                            
+                                    connection.commit(error => {
+                                        if (error) {
+                                            return connection.rollback(() => {
+                                            res.status(500).json({ error });
+                                        });
+                                    }
+
+                                    connection.release();
+                                    res.json(insertId);
+                                });
+                            }
+                        )
+                    }
+                )
+            }
+        }
+    });
+});
+
 app.listen(9000, () => console.log("App listening on port 9000"));
 
-//coding with heart
-//edited by Mr Andrew Bundi K
+//coding with heart//
+//edited by Mr Andrew Bundi K//
