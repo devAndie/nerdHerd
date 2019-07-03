@@ -8,7 +8,6 @@ const pool = mysql.createPool({
     password: process.env.DB_PASS,
     database: process.env.DB_NAME
 });
-
 app.get("/api/technicians", (req, res) => {
      pool.query("SELECT * FROM technicians", (error, rows) => {
         if (error) {
@@ -33,7 +32,6 @@ app.get("/api/Operators", (req, res) => {
        res.json(rows);
    });
 });
-
 app.get("/api/Technicians/:id", (req, res) => {
     pool.query(
            "SELECT Technician_id, Technician_name FROM Technicians WHERE Technician_id = 2",
@@ -46,7 +44,6 @@ app.get("/api/Technicians/:id", (req, res) => {
         }
     );
 });
-
 app.get("/api/technicians/:id/Tech_Support", (req, res) => {
     pool.query(
         "SELECT e.enquirer_id, e.enquirer_name, problem, e.operator_id, operator_name, e.technician_id, technician_name, affiliation FROM enquirers e JOIN operators o ON o.operator_id= e.operator_id JOIN technicians t ON t.technician_id= e.technician_id WHERE e.enquirer_id = 4",
@@ -119,7 +116,6 @@ app.post("/api/addTechnician", (req, res) => {
         }
     );
 });
-
 app.put("/api/updateOperator", (req, res) => {
     const Operator = req.body;
     if(Operator.name="") {
@@ -152,5 +148,51 @@ app.put("/api/updateTechnician", (req, res) => {
         }
     );
 });
+
+app.post("/api/showtimes", (req, res) => {
+    const { cinema_id, movie_id, time } = req.body;
+    if (!cinema_id || !movie_id || !time) {
+        return res.status(400).json({ error: "Invalid payload" });
+    }
+    pool.query(
+        "INSERT INTO showtime (cinema_id, movie_id, time) VALUES (?, ?, ?)",
+        [cinema_id, movie_id, time],
+        (error, results) => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(results.insertId);
+        }
+    );
+});
+//updt
+app.put("/api/Techsupport/:id", (req, res) => {
+    const { enquirer_id, Operator_id, Technician } = req.body;
+    if (!enquirer_id || !Operator_id || !Technician) {
+        return res.status(400).json({ error: "Invalid payload" });
+    }
+    pool.query(
+        "UPDATE showtime SET cinema_id = ?, movie_id = ?, time = ? WHERE id = ?",
+        [cinema_id, movie_id, time, req.params.id],
+        (error, results) => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(results.changedRows);
+        });
+    });
+app.delete("/api/showtimes/:id", (req, res) => {
+    pool.query(
+        "DELETE FROM showtime WHERE id = ?",
+        [req.params.id],
+        (error, results) => {
+            if (error) {
+    +                 return res.status(500).json({ error });
+    +             }
+    +
+    +             res.json(results.affectedRows);
+    +         }
+    +     );
+    + });
 
 app.listen(9000, () => console.log("App listening on port 9000"));
