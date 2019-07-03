@@ -166,13 +166,13 @@ app.post("/api/Techsupport", (req, res) => {
     );
 });
 //updt
-app.put("/api/Techsupport/:id", (req, res) => {
-    const { enquirer_id, Operator_id, Technician } = req.body;
-    if (!enquirer_id || !Operator_id || !Technician) {
+app.put("/api/enquirer/:id", (req, res) => {
+    const { enquirer_id, Operator_id, Technician_id } = req.body;
+    if (!enquirer_id || !Operator_id || !Technician_id) {
         return res.status(400).json({ error: "Invalid payload" });
     }
     pool.query(
-        "UPDATE showtime SET cinema_id = ?, movie_id = ?, time = ? WHERE id = ?",
+        "UPDATE enquirers SET Operator_id = 3, Technician_id = 4, technician_dispatch = yes WHERE enquirer_id = 5",
         [cinema_id, movie_id, time, req.params.id],
         (error, results) => {
             if (error) {
