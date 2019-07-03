@@ -149,7 +149,7 @@ app.put("/api/updateTechnician", (req, res) => {
     );
 });
 
-app.post("/api/showtimes", (req, res) => {
+app.post("/api/Techsupport", (req, res) => {
     const { cinema_id, movie_id, time } = req.body;
     if (!cinema_id || !movie_id || !time) {
         return res.status(400).json({ error: "Invalid payload" });
@@ -181,18 +181,17 @@ app.put("/api/Techsupport/:id", (req, res) => {
             res.json(results.changedRows);
         });
     });
-app.delete("/api/showtimes/:id", (req, res) => {
+app.delete("/api/Techsupport/:id", (req, res) => {
     pool.query(
         "DELETE FROM showtime WHERE id = ?",
         [req.params.id],
         (error, results) => {
             if (error) {
-    +                 return res.status(500).json({ error });
-    +             }
-    +
-    +             res.json(results.affectedRows);
-    +         }
-    +     );
-    + });
+                return res.status(500).json({ error });
+            }
+            res.json(results.affectedRows);
+        }
+    );
+});
 
 app.listen(9000, () => console.log("App listening on port 9000"));
