@@ -116,6 +116,22 @@ app.post("/api/addTechnician", (req, res) => {
         }
     );
 });
+app.post("/api/addenquirer", (req, res) => {
+    const {enquirer_id, enquirer_name, enquirer_address } = req.body;
+    if (!enquirer_id || !enquirer_name || !enquirer_address) {
+        return res.status(400).json({ error: "Invalid payload" });
+    }
+    pool.query(
+        "INSERT INTO enquirers (enquirer_id, enquirer_name, enquirer_address) VALUES (6, 'Mr Khal', 'Northlands')",
+        [cinema_id, movie_id, time],
+        (error, results) => {
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(results.insertId);
+        }
+    );
+});
 app.put("/api/updateOperator", (req, res) => {
     const Operator = req.body;
     if(Operator.name="") {
@@ -148,24 +164,6 @@ app.put("/api/updateTechnician", (req, res) => {
         }
     );
 });
-
-app.post("/api/addenquirer", (req, res) => {
-    const {enquirer_id, enquirer_name, enquirer_address } = req.body;
-    if (!enquirer_id || !enquirer_name || !enquirer_address) {
-        return res.status(400).json({ error: "Invalid payload" });
-    }
-    pool.query(
-        "INSERT INTO enquirers (enquirer_id, enquirer_name, enquirer_address) VALUES (6, 'Mr Khal', 'Northlands')",
-        [cinema_id, movie_id, time],
-        (error, results) => {
-            if (error) {
-                return res.status(500).json({ error });
-            }
-            res.json(results.insertId);
-        }
-    );
-});
-//updt
 app.put("/api/enquirer/:id", (req, res) => {
     const { enquirer_id, Operator_id, Technician_id } = req.body;
     if (!enquirer_id || !Operator_id || !Technician_id) {
@@ -181,9 +179,9 @@ app.put("/api/enquirer/:id", (req, res) => {
         res.json(results.changedRows);
     });
 });
-app.delete("/api/dropenquirer/:id", (req, res) => {
+app.delete("/api/dropOperator/:id", (req, res) => {
     pool.query(
-        "DELETE FROM enquirers WHERE id = 4",
+        "DELETE FROM Operator WHERE id = 4",
         [req.params.id],
         (error, results) => {
             if (error) {
