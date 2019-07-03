@@ -149,13 +149,13 @@ app.put("/api/updateTechnician", (req, res) => {
     );
 });
 
-app.post("/api/Techsupport", (req, res) => {
-    const { cinema_id, movie_id, time } = req.body;
-    if (!cinema_id || !movie_id || !time) {
+app.post("/api/addenquirer", (req, res) => {
+    const {enquirer_id, enquirer_name, enquirer_address } = req.body;
+    if (!enquirer_id || !enquirer_name || !enquirer_address) {
         return res.status(400).json({ error: "Invalid payload" });
     }
     pool.query(
-        "INSERT INTO showtime (cinema_id, movie_id, time) VALUES (?, ?, ?)",
+        "INSERT INTO enquirers (enquirer_id, enquirer_name, enquirer_address) VALUES (6, 'Mr Khal', 'Northlands')",
         [cinema_id, movie_id, time],
         (error, results) => {
             if (error) {
@@ -175,12 +175,12 @@ app.put("/api/enquirer/:id", (req, res) => {
         "UPDATE enquirers SET Operator_id = 3, Technician_id = 4, technician_dispatch = yes WHERE enquirer_id = 5",
         [cinema_id, movie_id, time, req.params.id],
         (error, results) => {
-            if (error) {
-                return res.status(500).json({ error });
-            }
-            res.json(results.changedRows);
-        });
+        if (error) {
+            return res.status(500).json({ error });
+        }
+        res.json(results.changedRows);
     });
+});
 app.delete("/api/dropenquirer/:id", (req, res) => {
     pool.query(
         "DELETE FROM enquirers WHERE id = 4",
