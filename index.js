@@ -83,7 +83,6 @@ app.get("/api/technicians/:id/Generate_Report", (req, res) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.post("/api/addOperator", (req, res) => {
     const Operator = req.body;
     if (Operator.name="") {
@@ -203,5 +202,7 @@ app.delete("/api/dropenquirer/:id", (req, res) => {
         }
     );
 });
-
 app.listen(9000, () => console.log("App listening on port 9000"));
+
+//coding with heart
+//edited by Mr Andrew Bundi K
