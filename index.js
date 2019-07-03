@@ -181,9 +181,9 @@ app.put("/api/Techsupport/:id", (req, res) => {
             res.json(results.changedRows);
         });
     });
-app.delete("/api/Techsupport/:id", (req, res) => {
+app.delete("/api/dropenquirer/:id", (req, res) => {
     pool.query(
-        "DELETE FROM showtime WHERE id = ?",
+        "DELETE FROM enquirers WHERE id = 4",
         [req.params.id],
         (error, results) => {
             if (error) {
