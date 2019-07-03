@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME
 });
 app.get("/api/technicians", (req, res) => {
-     pool.query("SELECT * FROM technicians", (error, rows) => {
+    pool.query("SELECT * FROM technicians", (error, rows) => {
         if (error) {
             return res.status(500).json({ error });
         }
@@ -18,25 +18,25 @@ app.get("/api/technicians", (req, res) => {
 });
 app.get("/api/enquirers", (req, res) => {
     pool.query("SELECT * FROM enquirers", (error, rows) => {
-       if (error) {
-           return res.status(500).json({ error });
-       }
-       res.json(rows);
-   });
+        if (error) {
+            return res.status(500).json({ error });
+        }
+        res.json(rows);
+    });
 });
 app.get("/api/Operators", (req, res) => {
     pool.query("SELECT * FROM Operators", (error, rows) => {
-       if (error) {
-           return res.status(500).json({ error });
-       }
-       res.json(rows);
-   });
+        if (error) {
+            return res.status(500).json({ error });
+        }
+        res.json(rows);
+    });
 });
 app.get("/api/Technicians/:id", (req, res) => {
     pool.query(
-           "SELECT Technician_id, Technician_name FROM Technicians WHERE Technician_id = 2",
-           [req.params.id],
-           (error, rows) => {
+        "SELECT Technician_id, Technician_name FROM Technicians WHERE Technician_id = 2",
+        [req.params.id],
+        (error, rows) => {
             if (error) {
                 return res.status(500).json({ error });
             }
@@ -85,38 +85,38 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.post("/api/addOperator", (req, res) => {
     const Operator = req.body;
-    if (Operator.name="") {
-    return res.status(400).json({ error: "Invalid payload" });
+    if (Operator.name = "") {
+        return res.status(400).json({ error: "Invalid payload" });
     }
     pool.query(
         "INSERT INTO Operators (Operator_id, Operator_name, department) VALUES (6, 'Billie Mwai', 'responder'), (7, 'Joe Baiden', 'responder'), (8, 'Thomas Kruger', 'responder')",
         [Operator.name],
         (error, results) => {
             if (error) {
-             return res.status(500).json({ error });
+                return res.status(500).json({ error });
             }
-        res.json(results.insertId);
-        } 
+            res.json(results.insertId);
+        }
     );
 });
 app.post("/api/addTechnician", (req, res) => {
     const Technician = req.body;
-    if (Technician.name="") {
-    return res.status(400).json({ error: "Invalid payload" });
+    if (Technician.name = "") {
+        return res.status(400).json({ error: "Invalid payload" });
     }
-     pool.query(
+    pool.query(
         "INSERT INTO Technicians (Technician_id, Technician_name, affiliation) VALUES (7, 'John Oloo', 'system Installation'), (8, 'Samwell Kiberenge', 'Hardware maintenance')",
         [Technician.name],
         (error, results) => {
             if (error) {
-             return res.status(500).json({ error });
+                return res.status(500).json({ error });
             }
-        res.json(results.insertId);
+            res.json(results.insertId);
         }
     );
 });
 app.post("/api/addenquirer", (req, res) => {
-    const {enquirer_id, enquirer_name, enquirer_address } = req.body;
+    const { enquirer_id, enquirer_name, enquirer_address } = req.body;
     if (!enquirer_id || !enquirer_name || !enquirer_address) {
         return res.status(400).json({ error: "Invalid payload" });
     }
@@ -133,7 +133,7 @@ app.post("/api/addenquirer", (req, res) => {
 });
 app.put("/api/updateOperator", (req, res) => {
     const Operator = req.body;
-    if(Operator.name="") {
+    if (Operator.name = "") {
         return res.status(400).json({ error: "Invalid payload" });
     }
     pool.query(
@@ -149,7 +149,7 @@ app.put("/api/updateOperator", (req, res) => {
 });
 app.put("/api/updateTechnician", (req, res) => {
     const Technician = req.body;
-    if(Technician.name="") {
+    if (Technician.name = "") {
         return res.status(400).json({ error: "Invalid payload" });
     }
     pool.query(
@@ -172,11 +172,11 @@ app.put("/api/enquirer/:id", (req, res) => {
         "UPDATE enquirers SET Operator_id = 3, Technician_id = 4, technician_dispatch = yes WHERE enquirer_id = 5",
         [cinema_id, movie_id, time, req.params.id],
         (error, results) => {
-        if (error) {
-            return res.status(500).json({ error });
-        }
-        res.json(results.changedRows);
-    });
+            if (error) {
+                return res.status(500).json({ error });
+            }
+            res.json(results.changedRows);
+        });
 });
 app.delete("/api/dropOperator/:id", (req, res) => {
     pool.query(
@@ -204,45 +204,45 @@ app.delete("/api/dropenquirer/:id", (req, res) => {
 });
 
 app.post("/api/nerdHerds", (req, res) => {
-        const {Operator_id, Operator_name, Department} = req.body;
-            if (!Operator_id ||Operator_name ||Department) {
-                return res.status(400).json({ error: "Invalid payload" });
+    const { Operator_id, Operator_name, Department } = req.body;
+    if (!Operator_id || Operator_name || Department) {
+        return res.status(400).json({ error: "Invalid payload" });
+    }
+    pool.getConnection((error, connection) => {
+        if (error) {
+            return res.status(500).json({ error });
+        }
+        connection.beginTransaction(error => {
+            if (error) {
+                return res.status(500).json({ error });
             }
-            pool.getConnection((error, connection) => {
-                if (error) {
-                    return res.status(500).json({ error });
-                }
-                connection.beginTransaction(error => {
+            connection.query(
+                "INSERT INTO Operators (Operator_id, Operator_name, Department) VALUES (?, ?, ?)",
+                [Operator_id, Operator_name, Department],
+                (error, results) => {
                     if (error) {
-                        return res.status(500).json({ error });
+                        return connection.rollback(() => {
+                            res.status(500).json({ error });
+                        });
                     }
+                    const insertId = results.insertId;
+                    const Technician_id = genres = Technician_id.map(Technician_id => [insertId, Technician_id]);
+                    const Technician_name = Technician_name.map(Technician_name => [insertId, Technician_name]);
+                    const Affiliation = Affiliation.map(Affiliation => [insertId, Affiliation]);
                     connection.query(
-                        "INSERT INTO Operators (Operator_id, Operator_name, Department) VALUES (?, ?, ?)",
-                        [Operator_id, Operator_name, Department],
+                        "INSERT INTO Technicians (Technician_id, Technician_name, Affiliation) VALUES (?, ?, ?)",
+                        [Technician_id, Technician_name, Affiliation],
                         (error, results) => {
                             if (error) {
                                 return connection.rollback(() => {
-                                res.status(500).json({ error });
-                            });
-                        }
-                        const insertId = results.insertId;
-                        const Technician_id = genres=Technician_id.map(Technician_id => [insertId, Technician_id]);
-                        const Technician_name = Technician_name.map(Technician_name => [insertId, Technician_name]);
-                        const Affiliation =Affiliation.map(Affiliation => [insertId, Affiliation]);
-                        connection.query(
-                            "INSERT INTO Technicians (Technician_id, Technician_name, Affiliation) VALUES (?, ?, ?)",
-                            [Technician_id, Technician_name, Affiliation],
-                            (error, results) => {
-                                if (error) {
-                                    return connection.rollback(() => {
-                                        res.status(500).json({ error });
-                                    });
-                                }
+                                    res.status(500).json({ error });
+                                });
+                            }
                             const insertId = results.insertId;
-                            const enquirer_id = enquirer_id.map(enquirer_id =>[insertId, enquirer_id])
-                            const enquirer_name = enquirer_name.map(enquirer_name =>[insertId, enquirer_name])
-                            const enquirer_address = enquirer_address.map(enquirer_address => [insertId, enquirer_address])
-                            const problem = problem.map()
+                            const enquirer_id = enquirer_id.map(enquirer_id => [insertId, enquirer_id]);
+                            const enquirer_name = enquirer_name.map(enquirer_name => [insertId, enquirer_name]);
+                            const enquirer_address = enquirer_address.map(enquirer_address => [insertId, enquirer_address]);
+                            const problem = problem.map(problem => [insertId, problem]);
                             const Technician_Dispatch = Technician_Dispatch.map(Technician_Dispatch => [insertId, Technician_Dispatch]);
                             connection.query(
                                 "INSERT INTO enquirers (enquirer_id, enquirer_name, enquirer_address, problem, problem, Technician_dispatch) VALUES (?, ?, ?, ?, ?)",
@@ -253,23 +253,24 @@ app.post("/api/nerdHerds", (req, res) => {
                                             res.status(500).json({ error });
                                         });
                                     }
-                            
+
                                     connection.commit(error => {
                                         if (error) {
                                             return connection.rollback(() => {
-                                            res.status(500).json({ error });
-                                        });
-                                    }
+                                                res.status(500).json({ error });
+                                            });
+                                        }
 
-                                    connection.release();
-                                    res.json(insertId);
-                                });
-                            }
-                        )
-                    }
-                )
-            }
-        }
+                                        connection.release();
+                                        res.json(insertId);
+                                    });
+                                }
+                            )
+                        }
+                    )
+                }
+            )
+        });
     });
 });
 
