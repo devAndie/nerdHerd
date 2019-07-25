@@ -4,6 +4,7 @@ import NerdsList from "./NerdsList";
 import "./App.css";
 
 // This is static hard-coded data, we shall later fetch it from our server
+//
 const NERDS = [
     {
         id: 1,
@@ -30,7 +31,7 @@ const NERDS = [
         nerd_count: 1
     }
 ];
-     
+//
 function App() {
     return (
         <div className="ndhd-app">
