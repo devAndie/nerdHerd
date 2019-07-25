@@ -1,7 +1,7 @@
 import React from "react";
 
-function Nerds({ nerdHerd }) {
-    const { id, Operators_name, Technicians_name, Department, affiliation } = nerdHerd;
+function Nerd({ Nerds}) {
+    const { id, Operators_name, Technicians_name, Department, affiliation } = Nerds;
     let nerdText = "";
     let nerd_count =  "";
 

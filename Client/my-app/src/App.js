@@ -39,6 +39,7 @@ function App() {
             </header>
             <main className="ndhd-main">
                 <NerdsList nerds={NERDS} />
+                <NerdsList/>
             </main>
         </div>
     );
