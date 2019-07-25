@@ -1,6 +1,12 @@
 import React from "react";
+import { Router } from "@reach/router";
 import NavBar from "./NavBar";
 import NerdsList from "./NerdsList";
+import TechniciansDetails from "./TechniciansDetails";
+import NerdsList from "./NerdsList";
+import OperatorsDetails from "./OperatorsDetails";
+import Admin from "./Admin";
+import NotFound from "./NotFound";
 import "./App.css";
 
 // This is static hard-coded data, we shall later fetch it from our server
@@ -39,8 +45,15 @@ function App() {
                 <NavBar />
             </header>
             <main className="ndhd-main">
-                <NerdsList nerds={NERDS} />
-                <NerdsList/>
+                <Router>
+                    <MovieList path="/" />
+                    <MovieDetails path="/movie/:movieId" />
+                    <CinemaList path="/cinemas" />
+                    <CinemaDetails path="/cinema/:cinemaId" />
+                    <Admin path="/admin" />
+                    <NotFound default />
+                </Router>
+
             </main>
         </div>
     );
