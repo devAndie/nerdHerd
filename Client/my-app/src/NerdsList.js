@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Movie from "./Movie";
 
 class NerdsList extends React.Component {
@@ -24,17 +25,54 @@ class NerdsList extends React.Component {
                     poster_url: 'http://bit.ly/2vI1c1n',
                     nerd_count: 0
                 }
-            ]
-        }
-    };
+            ],
+            nerds: [],
+            loading: false,
+            error: false
+        };
+    }
 
+    componentDidMount() {
+        this.fetchNerds();
+    }
+
+    fetchNerds() {
+        this.setState({ loading: true, error: false });
+
+        axios
+            .get("http://localhost:9000/api/nerds")
+            .get("/api/nerds")
+            .then(response => {
+                this.setState({
+                    nerds: response.data,
+                    loading: false,
+                    error: false
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    nerds: [],
+                    loading: false,
+                    error: true
+                });
+            });
+    }
+    
 
     render() {
-        const { nerds } = this.state;
+        const { nerds, loading, error } = this.state;
+
+        if (loading) {
+            return <Loading />;
+        }
+
+        if (error) {
+            return <Error />;
+        }
         return (
             <div className="ndls-container">
                 <div className="ndls-nerd-list">
-                    {nerds.map(m => (
+                    {nerds.map(n => (
                        <nerd key={n.id} nerds={n} />
                     ))}
                 </div>
