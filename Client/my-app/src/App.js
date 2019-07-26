@@ -10,7 +10,6 @@ import NotFound from "./NotFound";
 import "./App.css";
 
 // This is static hard-coded data, we shall later fetch it from our server
-//
 const NERDS = [
     {
         id: 1,
@@ -46,10 +45,10 @@ function App() {
             </header>
             <main className="ndhd-main">
                 <Router>
-                    <MovieList path="/" />
-                    <MovieDetails path="/movie/:movieId" />
+                    <NerdsList path="/" />
+                    <OperatorsDetails path="/Operators/:OperatorId" />
                     <CinemaList path="/cinemas" />
-                    <CinemaDetails path="/cinema/:cinemaId" />
+                    <TechniciansDetails path="/Technicians/:TechniciansId" />
                     <Admin path="/admin" />
                     <NotFound default />
                 </Router>
