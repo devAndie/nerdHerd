@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-import Movie from "./Movie";
+import Loading from "./Loading";
+import error from './error';
+import Nerds from "./Nerds";
 
 class NerdsList extends React.Component {
   constructor(props) {

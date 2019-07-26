@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 function Nerd({ Nerds}) {
     const { id, Operators_name, Technicians_name, Department, affiliation } = Nerds;
@@ -27,6 +28,10 @@ function Nerd({ Nerds}) {
                 <a href={`/Nerds/${id}`} className="ndhd-btn ndhd-btn-Operators">
                     See Nerds
                 </a>
+                <Link to={`/Nerds/${id}`} className="ndhd-btn ndhd-btn-Operators">
+                    See Nerds
+                </Link>
+   
             </div>
         </div>
     );
