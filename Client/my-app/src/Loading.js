@@ -2,7 +2,7 @@ import React from "react";
 
 function Loading() {
     return (
-        <div className="mvls-fullpage-text">
+        <div className="ndhd-fullpage-text">
             <p>Loading...</p>
         </div>
     );

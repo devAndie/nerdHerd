@@ -11,7 +11,7 @@ class NerdsList extends React.Component {
             nerds: [
                 {
                     id: 2,
-                    title: 'Kalank',
+                    Operators_name: 'Pass on',
                     poster_url: 'http://bit.ly/2WnGRdu',
                     nerd_count: 2
                 },

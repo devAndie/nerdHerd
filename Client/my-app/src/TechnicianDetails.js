@@ -22,16 +22,14 @@ import rror from "./Error";
 +         this.setState({ loading: true, error: false });
 +
 +         const { movieId } = this.props;
-+         const movieDetailsPromise = axios.get(`/api/movies/${movieId}`);
-+         const cinemasPromise = axios.get(`/api/movies/${movieId}/cinemas`);
++         const TechnicianDetails = axios.get(`/api/movies/${TechnicianId}`);
 +
 +         axios
-+             .all([movieDetailsPromise, cinemasPromise])
++             .all([TechnicianDetails])
 +             .then(
-+                 axios.spread((movieDetailsResponse, cinemasResponse) => {
++                 axios.spread((TechnicianDetails) => {
 +                     this.setState({
-+                         movieDetails: movieDetailsResponse.data,
-+                         cinemas: cinemasResponse.data,
++                         TechnicianDetails: TechnicianDetailsResponse.data,
 +                         loading: false,
 +                         error: false
 +                     });
@@ -40,7 +38,6 @@ import rror from "./Error";
 +             .catch(error => {
 +                 this.setState({
 +                     movieDetails: [],
-+                     cinemas: [],
 +                     loading: false,
 +                     error: true
 +                 });
