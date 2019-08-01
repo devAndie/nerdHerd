@@ -1,8 +1,11 @@
 import React from "react";
 import { Router } from "@reach/router";
 import NavBar from "./NavBar";
+import Nerds from "./Nerds"
 import NerdsList from "./NerdsList";
+import TechniciansList from "./TechniciansList";
 import TechniciansDetails from "./TechniciansDetails";
+import OperatorsList from "./OperatorsList";
 import OperatorsDetails from "./OperatorsDetails";
 import Admin from "./Admin";
 import NotFound from "./NotFound";
@@ -19,11 +22,14 @@ function App() {
                 <Router>
                     <NerdsList path="/" />
                     <OperatorsDetails path="/OperatorsList/:OperatorId" />
+                    <OperatorsList path="/OperatorsList" />
                     <TechniciansDetails path="/TechniciansDetails/:TechniciansId" />
+                    <TechniciansList path="/TechniciansList" />
                     <Admin path="/admin" />
                     <NotFound default />
 
                 </Router>
+
             </main>
         </div>
     );

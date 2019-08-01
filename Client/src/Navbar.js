@@ -6,7 +6,7 @@ function NavBar() {
         <div className="ndhd-container">
             <nav className="ndhd-nav">
                 <span className="ndhd-title">Nerd Profiles</span>
-                <Link to="/">Nerds</Link>
+                <Link to="/Nerds">Nerds</Link>
                 <Link to="/OperatorsList">Operators</Link>
                 <Link to="/TechniciansList">Technicians</Link>
                 <Link to="/Admin">Admin</Link>
