@@ -69,7 +69,7 @@ class NerdsList extends React.Component {
         }
 
         if (error) {
-            return <Error />;
+            return <error />;
         }
         return (
             <div className="ndls-container">

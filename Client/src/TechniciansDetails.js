@@ -3,11 +3,11 @@ import axios from "axios";
 import Loading from "./Loading";
 import rror from "./Error";
 
-+ class MovieDetails extends React.Component {
++ class TechniciansDetails extends React.Component {
 +     constructor(props) {
 +         super(props);
 +         this.state = {
-+             movieDetails: [],
++             TechniciansDetails: [],
 +             cinemas: [],
 +             loading: false,
 +             error: false
@@ -15,10 +15,10 @@ import rror from "./Error";
 +     }
 +
 +     componentDidMount() {
-+         this.fetchMovieDetails();
++         this.fetchTechniciansDetails();
 +     }
 +
-+     fetchMovieDetails() {
++     fetchTechniciansDetails() {
 +         this.setState({ loading: true, error: false });
 +
 +         const { movieId } = this.props;

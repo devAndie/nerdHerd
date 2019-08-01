@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
-import CinemaForm from "./CinemaForm";
-import CinemaTable from "./CinemaTable";
+import TechniciansForm from "./TechnicianForm";
+import TechniciansTable from "./TechniciansTable";
 
-class CinemaAdmin extends React.Component {
+class TechniciansAdmin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +13,7 @@ class CinemaAdmin extends React.Component {
             validationErrors: {},
             formSuccess: false,
             formError: false,
-            cinemas: [],
+            Technician: [],
             tableLoading: false,
             tableError: false,
             deleteSuccess: false
@@ -22,8 +22,8 @@ class CinemaAdmin extends React.Component {
         this.resetFormState = this.resetFormState.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleEditCinema = this.handleEditCinema.bind(this);
-        this.handleDeleteCinema = this.handleDeleteCinema.bind(this);
+        this.handleEditTechnician = this.handleEditTechnician.bind(this);
+        this.handleDeleteTechnician = this.handleDeleteTechnician.bind(this);
     }
 
     componentDidMount() {
@@ -34,17 +34,17 @@ class CinemaAdmin extends React.Component {
         this.setState({ tableLoading: true, tableError: false });
 
         axios
-            .get("/api/cinemas")
+            .get("/api/Technicians")
             .then(response => {
                 this.setState({
-                    cinemas: response.data,
+                    Technicians: response.data,
                     tableLoading: false,
                     tableError: false
                 });
             })
             .catch(error => {
                 this.setState({
-                    cinemas: [],
+                    Technicians: [],
                     tableLoading: false,
                     tableError: true
                 });
@@ -97,7 +97,7 @@ class CinemaAdmin extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const { editing, cinemas, id, name } = this.state;
+        const { editing, Technicians, id, name } = this.state;
 
         if (this.isValid()) {
             this.setState({
@@ -110,18 +110,18 @@ class CinemaAdmin extends React.Component {
             if (editing) {
                 // Existing record - update
                 axios
-                    .put(`/api/cinemas/${id}`, { name })
+                    .put(`/api/Technicians/${id}`, { name })
                     .then(response => {
                         this.resetFormState();
 
-                        const index = cinemas.findIndex(c => c.id === id);
+                        const index = Technicians.findIndex(t => t.id === id);
 
                         this.setState({
                             formSuccess: true,
-                            cinemas: [
-                                ...cinemas.slice(0, index),
+                            Technicians: [
+                                ...Technicians.slice(0, index),
                                 { id, name },
-                                ...cinemas.slice(index + 1)
+                                ...Technicians.slice(index + 1)
                             ]
                         });
                     })
@@ -136,12 +136,12 @@ class CinemaAdmin extends React.Component {
             } else {
                 // New record - Save
                 axios
-                    .post("/api/cinemas", { name })
+                    .post("/api/Technicians", { name })
                     .then(response => {
                         this.resetFormState();
                         this.setState({
                             formSuccess: true,
-                            cinemas: [...cinemas, { id: response.data, name }]
+                            Technicians: [...Technicians, { id: response.data, name }]
                         });
                     })
                     .catch(error => {
@@ -156,27 +156,27 @@ class CinemaAdmin extends React.Component {
         }
     }
 
-    handleEditCinema(cinema) {
+    handleEditTechnician(Technician) {
         return () => {
-            this.setState({ ...cinema, editing: true });
+            this.setState({ ...Technician, editing: true });
         };
     }
 
-    handleDeleteCinema(cinema, cinemas) {
+    handleDeleteTechnician(Technician, Technicians) {
         return () => {
-            const { id, name } = cinema;
+            const { id, name } = Technician;
 
             // eslint-disable-next-line no-restricted-globals
             if (confirm(`Are you sure you want to delete '${name}'?`)) {
                 axios
                     .delete(`/api/cinemas/${id}`)
                     .then(response => {
-                        const index = cinemas.findIndex(c => c.id === id);
+                        const index = Technicians.findIndex(c => c.id === id);
 
                         this.setState({
-                            cinemas: [
-                                ...cinemas.slice(0, index),
-                                ...cinemas.slice(index + 1)
+                            Technicians: [
+                                ...Technicians.slice(0, index),
+                                ...Technicians.slice(index + 1)
                             ],
                             deleteSuccess: true,
                             tableError: false
@@ -200,17 +200,17 @@ class CinemaAdmin extends React.Component {
             validationErrors,
             formSuccess,
             formError,
-            cinemas,
+            Technicians,
             tableLoading,
             tableError,
             deleteSuccess
         } = this.state;
 
         return (
-            <div className="mvls-cinema-admin">
-                <h1>Cinemas</h1>
-                <h3>{editing ? "Edit Cinema" : "Add Cinema"}</h3>
-                <CinemaForm
+            <div className="ndhd-Technicians-admin">
+                <h1>Technicians</h1>
+                <h3>{editing ? "Edit Technicians" : "Add Technicians"}</h3>
+                <TechniciansForm
                     name={name}
                     formSubmitting={formSubmitting}
                     validationErrors={validationErrors}
@@ -220,17 +220,17 @@ class CinemaAdmin extends React.Component {
                     resetFormState={this.resetFormState}
                     handleSubmit={this.handleSubmit}
                 />
-                <CinemaTable
-                    cinemas={cinemas}
+                <TechniciansTable
+                    Technicians={Technicians}
                     tableLoading={tableLoading}
                     tableError={tableError}
                     deleteSuccess={deleteSuccess}
-                    onEditCinema={this.handleEditCinema}
-                    onDeleteCinema={this.handleDeleteCinema}
+                    onEditTechnicians={this.handleEditTechnician}
+                    onDeleteTechnicians={this.handleDeleteTechnician}
                 />
             </div>
         );
     }
 }
 
-export default CinemaAdmin;
+export default TechniciansAdmin;

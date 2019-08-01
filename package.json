@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "concurrently": "^4.1.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
@@ -20,5 +21,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devAndie/nerdHerd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devAndie/nerdHerd/issues"
+  },
+  "homepage": "https://github.com/devAndie/nerdHerd#readme"
 }

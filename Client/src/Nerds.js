@@ -37,4 +37,4 @@ function Nerd({ Nerds}) {
     );
 }
 
-export default Nerds;
+export default Nerd;
