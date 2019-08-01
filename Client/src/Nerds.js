@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-function Nerd({ Nerds}) {
-    const { id, Operators_name, Technicians_name, Department, affiliation } = Nerds;
+function Nerds({ nerdsList}) {
+    const { id, Operators_name, Technicians_name, Department, affiliation } = nerdsList;
     let nerdText = "";
     let nerd_count =  "";
 
@@ -37,4 +37,4 @@ function Nerd({ Nerds}) {
     );
 }
 
-export default Nerd;
+export default Nerds;

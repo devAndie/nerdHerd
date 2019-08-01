@@ -4,18 +4,18 @@ import { Link } from "@reach/router";
 import Loading from "./Loading";
 import Error from "./Error";
 
-function TechnicianDetails(props) {
+function TechniciansList(props) {
     return (
         <div>
-            <h1>Technician {props.TechnicianId} Details</h1>
+            <h1>Technician {props.TechnicianId} list</h1>
         </div>
     );
 }
-class CinemaList extends React.Component {
+class techniciansList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cinemas: [],
+            Technicians: [],
             loading: false,
             error: false
         };
@@ -25,21 +25,21 @@ class CinemaList extends React.Component {
         this.fetchCinemas();
     }
 
-    fetchCinemas() {
+    fetchTechnicians() {
         this.setState({ loading: true, error: false });
 
         axios
-            .get("/api/cinemas")
+            .get("/api/technicians")
             .then(response => {
                 this.setState({
-                    cinemas: response.data,
+                    Technicians: response.data,
                     loading: false,
                     error: false
                 });
             })
             .catch(error => {
                 this.setState({
-                    cinemas: [],
+                    Technicians: [],
                     loading: false,
                     error: true
                 });
@@ -47,7 +47,7 @@ class CinemaList extends React.Component {
     }
 
     render() {
-        const { cinemas, loading, error } = this.state;
+        const { Technicians, loading, error } = this.state;
 
         if (loading) {
             return <Loading />;
@@ -58,19 +58,19 @@ class CinemaList extends React.Component {
         }
 
         return (
-            <div className="mvls-container">
-                <div className="mvls-cinema-list">
-                    {cinemas.map(c => (
-                        <div key={c.id} className="mvls-cinema">
-                            <div className="mvls-cinema-body">
-                                <div className="mvls-title">{c.name}</div>
+            <div className="ndhd-container">
+                <div className="ndhd-technician-list">
+                    {Technicians.map(t => (
+                        <div key={t.id} className="ndhd-technician">
+                            <div className="ndhd-technician-body">
+                                <div className="ndhd-title">{t.name}</div>
                             </div>
-                            <div className="mvls-cinema-footer">
+                            <div className="ndhd-technician-footer">
                                 <Link
-                                    to={`/cinema/${c.id}`}
-                                    className="mvls-btn mvls-btn-movies"
+                                    to={`/technician/${t.id}`}
+                                    className="ndhd-btn ndhd-btn-technicians"
                                 >
-                                    See Movies
+                                    See Technicians
                                 </Link>
                             </div>
                         </div>
@@ -81,4 +81,4 @@ class CinemaList extends React.Component {
     }
 }
 
-export default TechnicianDetails;
+export default TechniciansList;

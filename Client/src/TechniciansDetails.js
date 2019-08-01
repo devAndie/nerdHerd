@@ -8,7 +8,6 @@ class TechniciansDetails extends React.Component {
         super(props);
         this.state = {
             TechniciansDetails: [],
-            cinemas: [],
             loading: false,
             error: false
         };
@@ -20,7 +19,7 @@ class TechniciansDetails extends React.Component {
    fetchTechniciansDetails() {
         this.setState({ loading: true, error: false });
         const { TechnicianId } = this.props;
-        const TechnicianDetails = axios.get(`/api/movies/${TechnicianId}`);
+        const TechnicianDetails = axios.get(`/api/technicians/${TechnicianId}`);
 
         axios
             .all([TechnicianDetails])
@@ -61,7 +60,7 @@ class TechniciansDetails extends React.Component {
         }
         if (TechnicianDetails.length !== 1) {
             return (
-                <Error message="Sorry, the movie does not exist. Please retry." />
+                <Error message="Sorry, the Technician does not exist. Please retry." />
             );
         }
 
@@ -73,13 +72,13 @@ class TechniciansDetails extends React.Component {
         } = TechnicianDetails[0];
 
         const TechnicianNameDateStrings = Technicians.map(Technician => {
-            const dateString = this.toDateString(Technician.time);
+            const technicianAffiliation = this.technicianAffiliation(Technician.affiliation);
 
-            return `${Technician.name}:${dateString}`;
+            return `${Technician.name}:${affiliation}`;
         });
         return (
-            <div className="mvls-container">
-                <div className="mvls-movie-details-wrapper">
+            <div className="ndhd-container">
+                <div className="ndhd-movie-details-wrapper">
                     <div className="mvls-movie-details">
                         <img
                             className="ndhd-technician-details-poster"
@@ -97,8 +96,8 @@ class TechniciansDetails extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="mvls-movie-cinemas">
-                    <h2>List of Cinemas playing Movie</h2>
+                <div className="ndhd-technicians-dispatched">
+                    <h2>List of technicians dispatched e</h2>
                     {TechniciansDispatched.map(Technician => {
                         const { TechnicianName, affiliation } = Technician;
 

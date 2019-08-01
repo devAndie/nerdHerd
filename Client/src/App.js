@@ -20,12 +20,12 @@ function App() {
             </header>
             <main className="ndhd-main">
                 <Router>
-                    <NerdsList path="/" />
+                    <NerdsList path="/NerdsList" />
                     <OperatorsDetails path="/OperatorsList/:OperatorId" />
                     <OperatorsList path="/OperatorsList" />
                     <TechniciansDetails path="/TechniciansDetails/:TechniciansId" />
                     <TechniciansList path="/TechniciansList" />
-                    <Admin path="/admin" />
+                    <Admin path="/Admin" />
                     <NotFound default />
 
                 </Router>
