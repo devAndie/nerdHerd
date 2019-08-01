@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Loading from "./Loading";
-import error from './error';
+import error from './Error';
 import Nerds from "./Nerds";
 
 class NerdsList extends React.Component {
