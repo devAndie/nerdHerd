@@ -34,31 +34,7 @@ class NerdsList extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.fetchNerds();
-    }
-
-    fetchNerds() {
-        this.setState({ loading: true, error: false });
-
-        axios
-            .get("http://localhost:9000/api/nerds")
-            .get("/api/nerds")
-            .then(response => {
-                this.setState({
-                    nerds: response.data,
-                    loading: false,
-                    error: false
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    nerds: [],
-                    loading: false,
-                    error: true
-                });
-            });
-    }
+    
     
 
     render() {
