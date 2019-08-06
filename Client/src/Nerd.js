@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-function Nerds({ nerdsList}) {
+function Nerd({ nerdsList}) {
     const { id, Operators_name, Technicians_name, Department, affiliation } = nerdsList;
     let nerdText = "";
     let nerd_count =  "";
@@ -25,9 +25,6 @@ function Nerds({ nerdsList}) {
                 <p className="ndhd-nerd-count">{nerdText}</p>
             </div>
             <div className="ndhd-nerds-footer">
-                <a href={`/Nerds/${id}`} className="ndhd-btn ndhd-btn-Operators">
-                    See Nerds
-                </a>
                 <Link to={`/Nerds/${id}`} className="ndhd-btn ndhd-btn-Operators">
                     See Nerds
                 </Link>
@@ -37,4 +34,4 @@ function Nerds({ nerdsList}) {
     );
 }
 
-export default Nerds;
+export default Nerd;

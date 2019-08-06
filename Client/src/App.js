@@ -1,8 +1,9 @@
 import React from "react";
 import { Router } from "@reach/router";
 import NavBar from "./NavBar";
-import Nerds from "./Nerds"
+import Nerd from "./Nerd"
 import NerdsList from "./NerdsList";
+import NerdDetails from "./NerdDetails";
 import TechniciansList from "./TechniciansList";
 import TechniciansDetails from "./TechniciansDetails";
 import OperatorsList from "./OperatorsList";
@@ -21,6 +22,7 @@ function App() {
             <main className="ndhd-main">
                 <Router>
                     <NerdsList path="/NerdsList" />
+                    <NerdDetails path="./NerdDetails" />
                     <OperatorsDetails path="/OperatorsList/:OperatorId" />
                     <OperatorsList path="/OperatorsList" />
                     <TechniciansDetails path="/TechniciansDetails/:TechniciansId" />

@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Loading from "./Loading";
-import error from './Error';
-import Nerds from "./Nerds";
+import Error from './Error';
+import Nerd from "./Nerd";
 
 //function NerdsList({nerdsList}){
 class NerdsList extends React.Component {
@@ -15,12 +15,18 @@ class NerdsList extends React.Component {
     };
 }
     render(){
-        const {nerdsList} =this.state;
+        const {nerdsList, loading, error} =this.state;
+        if (loading) {
+            return <Loading />;
+        }
+        if (error) {
+            return <Error />;
+        }
         return(
             <div className="ndhd-container">
                 <div className="ndhd-nerd-list">
                    {nerdsList.map(n =>(
-                       <Nerds key ={n.id} nerdsList={n}/>
+                       <Nerd key ={n.id} nerdsList={n}/>
                    ))} 
                 </div>
             </div>
@@ -28,6 +34,27 @@ class NerdsList extends React.Component {
     }
     componentDidMount(){
         this.fetchNerdList();
+    }
+    fetchNerdList(){
+        this.setState({Loading: true, error: false });
+        axios
+        .get("/api/technicians")
+        .get("/api/operators")
+        .then(Response =>{
+            this.setState({
+                nerdsList: [],
+                Loading: false,
+                error: false
+            });
+        })
+        .catch(error=>{
+            this.setState({
+                nerdsList: [],
+                Loading: false,
+                error: true,
+            });
+        });
+        
     }
 }
 

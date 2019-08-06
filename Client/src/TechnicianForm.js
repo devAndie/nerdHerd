@@ -1,7 +1,7 @@
 import React from "react";
 
 // We make our form a fully controlled component that does not manage any state.
-function CinemaForm({
+function TechnicianForm({
     name,
     formSubmitting,
     validationErrors,
@@ -66,4 +66,4 @@ function CinemaForm({
     );
 }
 
-export default CinemaForm;
+export default TechnicianForm;

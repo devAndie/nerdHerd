@@ -3,7 +3,7 @@ import axios from "axios";
 import TechniciansForm from "./TechnicianForm";
 import TechniciansTable from "./TechniciansTable";
 
-class TechniciansAdmin extends React.Component {
+class TechnicianAdmin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,14 +27,14 @@ class TechniciansAdmin extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchCinemas();
+        this.fetchTechnicians();
     }
 
-    fetchCinemas() {
+    fetchTechnicians() {
         this.setState({ tableLoading: true, tableError: false });
 
         axios
-            .get("/api/Technicians")
+            .get("/api/technicians")
             .then(response => {
                 this.setState({
                     Technicians: response.data,
@@ -233,4 +233,4 @@ class TechniciansAdmin extends React.Component {
     }
 }
 
-export default TechniciansAdmin;
+export default TechnicianAdmin;

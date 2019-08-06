@@ -10,7 +10,7 @@ function Error({ message }) {
 }
 
 Error.defaultProps = {
-    message: "Sorry, a server error occurred. Please retry."
+    message: "Sorry, a server error occurred. Please retry later."
 };
 
 export default Error;
