@@ -4,14 +4,8 @@ import { Link } from "@reach/router";
 import Loading from "./Loading";
 import Error from "./Error";
 
-function TechniciansList(props) {
-    return (
-        <div>
-            <h1>Technician {props.TechnicianId} list</h1>
-        </div>
-    );
-}
-class techniciansList extends React.Component {
+
+class TechniciansList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +16,7 @@ class techniciansList extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchCinemas();
+        this.fetchTechnicians();
     }
 
     fetchTechnicians() {

@@ -1,7 +1,7 @@
 import React from "react";
 
 function TechniciansTable({
-    Technicians,
+    technicians,
     tableLoading,
     tableError,
     deleteSuccess,
@@ -9,13 +9,13 @@ function TechniciansTable({
     onDeleteTechnician
 }) {
     if (tableLoading) {
-        return <p className="ndhd-table-loading">Loading Technicians...</p>;
+        return <p className="ndhd-table-loading">Loading technicians...</p>;
     }
 
     return (
         <div className="ndhd-table">
             {deleteSuccess && (
-                <p className="ndhd-alert mvls-alert-success">
+                <p className="ndhd-alert ndhd-alert-success">
                     Record deleted successfully.
                 </p>
             )}
@@ -27,40 +27,50 @@ function TechniciansTable({
             <table>
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Action</th>
+                        <th>Technician_id</th>
+                        <th>Technician_name</th>
+                        <th>Affiliation</th>
+                        <th>Operator_id</th>
                     </tr>
                 </thead>
-                {Technicians.length === 0 && (
+                {technicians.length === 0 && (
                     <tbody>
-                        <td colSpan="3" className="mvls-no-data">
-                            No data
-                        </td>
+                        <tr>
+                            <td colSpan="8" className="ndhd-no-data">
+                                No data
+                            </td>
+                        </tr>
                     </tbody>
                 )}
-                {Technicians.length > 0 && (
+                {technicians.length > 0 && (
                     <tbody>
-                        {Technicians.map((Technician, index) => {
-                            const { id, name } = Technician;
+                        {technicians.map((technician, index) => {
+                            const {
+                                technician_id,
+                                technician_name,
+                                affiliation,
+                                operator_id,
+                            } = technician;
 
                             return (
-                                <tr key={id}>
+                                <tr key={technician_id}>
                                     <td>{index + 1}</td>
-                                    <td>{name}</td>
+                                    <td>{technician_name}</td>
+                                    <td>{affiliation}</td>
+                                    <td>{operator_id}</td>
                                     <td>
                                         <span
-                                            className="mvls-table-link"
-                                            onClick={onEditTechnician(Technician)}
+                                            className="ndhd-table-link"
+                                            onClick={onEditTechnician(technician)}
                                         >
                                             Edit
                                         </span>
                                         &nbsp;&nbsp;|&nbsp;&nbsp;
                                         <span
-                                            className="mvls-table-link"
+                                            className="ndhd-table-link"
                                             onClick={onDeleteTechnician(
-                                                Technician,
-                                                Technicians
+                                                technician,
+                                                technicians
                                             )}
                                         >
                                             Delete
@@ -73,6 +83,8 @@ function TechniciansTable({
                 )}
             </table>
         </div>
+
+
     );
 }
 

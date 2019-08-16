@@ -4,7 +4,6 @@ import Loading from "./Loading";
 import Error from './Error';
 import Nerd from "./Nerd";
 
-//function NerdsList({nerdsList}){
 class NerdsList extends React.Component {
       constructor(props) {
       super(props);
@@ -37,23 +36,23 @@ class NerdsList extends React.Component {
     }
     fetchNerdList(){
         this.setState({Loading: true, error: false });
+
         axios
-        .get("/api/technicians")
-        .get("/api/operators")
-        .then(Response =>{
-            this.setState({
-                nerdsList: [],
-                Loading: false,
-                error: false
+            .get("/api/technicians" )
+            .then(Response =>{
+                this.setState({
+                    nerdsList: [],
+                    Loading: false,
+                    error: false
+                });
+            })
+            .catch(error=>{
+                this.setState({
+                    nerdsList: [],
+                    Loading: false,
+                    error: true,
+                });
             });
-        })
-        .catch(error=>{
-            this.setState({
-                nerdsList: [],
-                Loading: false,
-                error: true,
-            });
-        });
         
     }
 }

@@ -3,7 +3,6 @@ import axios from "axios";
 import Loading from "./Loading";
 import Error from "./Error";
 import { Location } from "@reach/router";
-import { EINPROGRESS } from "constants";
 
 class NerdDetails extends React.Component {
     constructor(props) {
@@ -44,15 +43,15 @@ class NerdDetails extends React.Component {
             });
         });
     }
-    toDateString(location) {
-        const dispatch = new Dispatch(location);
-        const address = location.getFullAddress();
-        const count = date.getCount() +1;
+    toDateString(location) { 
+        const dispatch = new Location(location);
+        const address = dispatch.getFullAddress();
+        const count = dispatch.getCount() +1;
 
         return `${address} - ${count}`;
     }
     render(){
-        const {nerdDetails, customers, loading, error} = this.state;
+        const {nerdDetails, loading, error} = this.state;
         if (loading){
             return <Loading />
         }
@@ -64,11 +63,8 @@ class NerdDetails extends React.Component {
                 <Error message="Sorry, the personnel does not exist. Please retry." />
             );
         }
-        const {Operator_name, Technician_name, affilliation, department,} = nerdDetails[0];
-        const customerNameDateStrings = customers.map(customers =>{
-            const dateString = this.toDateString(customers.address);
-            return `${customers.address}:${dateString}`;
-        });
+        const {Operator_name, Technician_name, affilliation, department, photo, title} = nerdDetails[0];
+        
 
         return (
             <div className="ndhd-container">
@@ -79,7 +75,8 @@ class NerdDetails extends React.Component {
                         src={photo}
                         alt={title}/>
                         <div className="ndhd-nerd-details-info">
-                            <h2>{title}</h2>
+                            <h2>{Operator_name}</h2>
+                            <p>{Technician_name}</p>
                             <p>{department}</p>
                             <p>
                                 <span>affilliation</span>:{affilliation}

@@ -18,9 +18,9 @@ function Nerd({ nerdsList}) {
         <div className="ndhd-nerds">
             <img className="ndhd-photo" src={""} alt={""} />
             <div className="ndhd-body">
-                <div className="ndhd-Oname">{Operators_name}</div>
-                <div className="ndhd-ODpt">{Department}</div>
-                <div className="ndhd-Tname">{Technicians_name}</div>
+                <div className="ndhd-operator-name">{Operators_name}</div>
+                <div className="ndhd-operator-Dpt">{Department}</div>
+                <div className="ndhd-technician-name">{Technicians_name}</div>
                 <div className="ndhd-TDpt">{affiliation}</div>
                 <p className="ndhd-nerd-count">{nerdText}</p>
             </div>

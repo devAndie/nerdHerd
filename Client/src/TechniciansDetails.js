@@ -50,7 +50,7 @@ class TechniciansDetails extends React.Component {
     }
 
     render() {
-        const { TechnicianDetails, cinemas, loading, error } = this.state;
+        const { TechnicianDetails, loading, error } = this.state;
 
         if (loading) {
             return <Loading />;
@@ -66,23 +66,17 @@ class TechniciansDetails extends React.Component {
 
         const {
             name,
-            affiliation,
-            Technicians, description, TechniciansDispatched,
+            affiliation, description, TechniciansDispatched,
             photo
         } = TechnicianDetails[0];
 
-        const TechnicianNameDateStrings = Technicians.map(Technician => {
-            const technicianAffiliation = this.technicianAffiliation(Technician.affiliation);
-
-            return `${Technician.name}:${affiliation}`;
-        });
         return (
             <div className="ndhd-container">
                 <div className="ndhd-movie-details-wrapper">
                     <div className="mvls-movie-details">
                         <img
                             className="ndhd-technician-details-poster"
-                            src={photo}
+                            src={photo} alt={photo}
                         />
                         <div className="ndhd-technician-details-info">
                             <h2>{name}</h2>

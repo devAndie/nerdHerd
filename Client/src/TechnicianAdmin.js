@@ -3,6 +3,7 @@ import axios from "axios";
 import TechniciansForm from "./TechnicianForm";
 import TechniciansTable from "./TechniciansTable";
 
+
 class TechnicianAdmin extends React.Component {
     constructor(props) {
         super(props);
@@ -169,7 +170,7 @@ class TechnicianAdmin extends React.Component {
             // eslint-disable-next-line no-restricted-globals
             if (confirm(`Are you sure you want to delete '${name}'?`)) {
                 axios
-                    .delete(`/api/cinemas/${id}`)
+                    .delete(`/api/technicians/${id}`)
                     .then(response => {
                         const index = Technicians.findIndex(c => c.id === id);
 

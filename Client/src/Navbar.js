@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link } from "@reach/router";
 
 function NavBar() {
@@ -6,10 +7,9 @@ function NavBar() {
         <div className="ndhd-container">
             <nav className="ndhd-nav">
                 <span className="ndhd-title">Nerd Profiles</span>
-                <br></br>
-                <Link to="/NerdList">NerdsList</Link><br></br>
-                <Link to="/OperatorsList">Operators</Link><br></br>
-                <Link to="/TechniciansList">Technicians</Link><br></br>
+                <Link to="/NerdsList">NerdsList</Link>
+                <Link to="/OperatorsList">Operators</Link>
+                <Link to="/TechniciansList">Technicians</Link>
                 <Link to="/Admin">Admin</Link>
 
             </nav>
